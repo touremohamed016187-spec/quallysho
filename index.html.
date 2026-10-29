@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quallysho Performance</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#0b1220;color:#f5f7fb}
+header{padding:24px 18px;background:#101c30;border-bottom:2px solid #35d07f}
+.logo{font-size:25px;font-weight:bold;color:#35d07f}
+header p{color:#b7c5d8}
+nav{display:flex;gap:18px;flex-wrap:wrap;padding:14px 18px;background:#142238}
+nav a{color:white;text-decoration:none;font-weight:bold}
+main{padding:20px;max-width:900px;margin:auto}
+.hero{padding:28px 20px;border-radius:18px;background:linear-gradient(135deg,#173e35,#15243c)}
+h1{font-size:30px;margin:0 0 12px}
+h2{color:#35d07f}
+p{line-height:1.6}
+button{background:#35d07f;border:0;padding:12px 16px;border-radius:8px;font-weight:bold;cursor:pointer}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:20px 0}
+.card{background:#142238;padding:18px;border-radius:12px}
+.number{font-size:25px;color:#35d07f;font-weight:bold}
+label{display:block;margin:12px 0 6px}
+input,select{width:100%;padding:12px;border-radius:8px;border:1px solid #42516a;background:#0b1220;color:white}
+.result{margin-top:15px;padding:14px;background:#142238;border-radius:10px}
+footer{text-align:center;color:#aab6c8;padding:25px}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">⚽ Quallysho Performance</div>
+<p>Analyse • Statistiques • Progression</p>
+</header>
+<nav>
+<a href="#accueil">Accueil</a>
+<a href="#stats">Statistiques</a>
+<a href="#analyse">Analyse</a>
+</nav>
+<main>
+<section class="hero" id="accueil">
+<h1>Comprends le jeu. Améliore ta performance.</h1>
+<p>Découvre les statistiques, compare les performances et analyse le football avec Quallysho Performance.</p>
+<a href="#analyse"><button>Analyser un joueur</button></a>
+</section>
+<section id="stats">
+<h2>Les indicateurs clés</h2>
+<div class="cards">
+<div class="card"><div class="number">Buts</div><p>Mesure l'efficacité offensive.</p></div>
+<div class="card"><div class="number">Passes</div><p>Évalue la création du jeu.</p></div>
+<div class="card"><div class="number">Défense</div><p>Observe les interventions défensives.</p></div>
+<div class="card"><div class="number">Forme</div><p>Suit la régularité du joueur.</p></div>
+</div>
+</section>
+<section id="analyse">
+<h2>Outil d'analyse du joueur</h2>
+<p>Entre les statistiques d'un joueur pour obtenir un résumé indicatif.</p>
+<label for="joueur">Nom du joueur</label>
+<input id="joueur" placeholder="Ex. : Cole Palmer">
+<label for="matchs">Nombre de matchs</label>
+<input id="matchs" type="number" min="1" placeholder="Ex. : 20">
+<label for="buts">Nombre de buts</label>
+<input id="buts" type="number" min="0" placeholder="Ex. : 8">
+<label for="passes">Passes décisives</label>
+<input id="passes" type="number" min="0" placeholder="Ex. : 5">
+<br><br>
+<button onclick="analyser()">Analyser</button>
+<div id="resultat" class="result" aria-live="polite">Les résultats apparaîtront ici.</div>
+</section>
+</main>
+<footer>© 2026 Quallysho Performance — Passion football</footer>
+<script>
+function analyser(){
+const nom=document.getElementById('joueur').value.trim()||'Joueur';
+const m=Number(document.getElementById('matchs').value);
+const b=Number(document.getElementById('buts').value);
+const p=Number(document.getElementById('passes').value);
+const r=document.getElementById('resultat');
+if(!Number.isInteger(m)||m<1||!Number.isInteger(b)||b<0||!Number.isInteger(p)||p<0){
+r.textContent='Entre un nombre de matchs supérieur à zéro et des statistiques positives.';
+return;
+}
+r.innerHTML='';
+const titre=document.createElement('strong');
+titre.textContent='Analyse de '+nom;
+const detail=document.createElement('p');
+detail.textContent='Buts par match : '+(b/m).toFixed(2)+' | Passes décisives par match : '+(p/m).toFixed(2);
+const total=document.createElement('p');
+total.textContent='Contributions offensives : '+(b+p)+' en '+m+' matchs.';
+r.append(titre,detail,total);
+}
+</script>
+</body>
+</html>
